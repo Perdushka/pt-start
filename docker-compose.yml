@@ -5,16 +5,16 @@ services:
     build:
         context: ./bot
     environment:
-      - TOKEN=7938304823:AAHez-FOTlIFkjSCMQLCphjYpbb2ZXfvKTA
-      - RM_HOST=192.168.220.164
-      - RM_PORT=22
-      - RM_USER=root
-      - RM_PASSWORD=1234
-      - DB_USER=postgres
-      - DB_PASSWORD=1234
-      - DB_HOST=192.168.220.164
-      - DB_PORT=5432
-      - DB_DATABASE=bot
+      - TOKEN=${TOKEN}
+      - RM_HOST=${RM_HOST}
+      - RM_PORT=${RM_PORT}
+      - RM_USER=${RM_USER}
+      - RM_PASSWORD=${RM_PASSWORD}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+      - DB_DATABASE=${DB_DATABASE}
     volumes:
       - pg_logs:/var/log/
     container_name: "bot"
@@ -25,24 +25,24 @@ services:
       - pg_logs:/var/log/
     environment:
       - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=1234
-      - DB_REPL_USER=repl_user
-      - DB_REPL_PASSWORD=1234
-      - DB_REPL_HOST=192.168.220.163.my_network
-      - DB_PORT=5432
-      - DB_DATABASE=bot
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - DB_REPL_USER=${DB_REPL_USER}
+      - DB_REPL_PASSWORD=${DB_REPL_PASSWORD}
+      - DB_REPL_HOST=${DB_REPL_HOST}.my_network
+      - DB_PORT=${DB_PORT}
+      - DB_DATABASE=${DB_DATABASE}
     container_name: "db"
   db_repl:
     image: db_repl_image
     build: ./db_repl
     container_name: "db_repl"
     environment:
-      - DB_HOST=192.168.220.164.my_network
-      - DB_PORT=5432
-      - DB_REPL_HOST=192.168.220.163
-      - DB_REPL_PORT=5432
-      - DB_REPL_USER=repl_user
-      - DB_REPL_PASSWORD=1234
+      - DB_HOST=${DB_HOST}.my_network
+      - DB_PORT=${DB_PORT}
+      - DB_REPL_HOST=${DB_REPL_HOST}
+      - DB_REPL_PORT=${DB_REPL_PORT}
+      - DB_REPL_USER=${DB_REPL_USER}
+      - DB_REPL_PASSWORD=${DB_REPL_PASSWORD}
 volumes:
   pg_data:
   pg_logs:
