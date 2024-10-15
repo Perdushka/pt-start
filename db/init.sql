@@ -22,6 +22,6 @@ CREATE TABLE IF NOT EXISTS emails (
 INSERT INTO emails (email) 
 VALUES ('aboba@gmail.com'), ('bibka@yandex.ru');
 
-INSERT INTO phone_numbers (phone_number) 
+INSERT INTO phone_nubers (phone_number) 
 VALUES ('88005553535'), ('+78888888888');
 
