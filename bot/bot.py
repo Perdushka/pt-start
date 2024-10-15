@@ -177,19 +177,12 @@ def get_services(update: Update, context):
 
 def get_repl_logs(update: Update, context):
     try:
-        # Выполнение команды для получения логов
-        result = subprocess.run(
-            ["bash", "-c", f"cat {LOG_FILE_PATH} | grep repl | tail -n 15"],
-            capture_output=True,
-            text=True
-        )
-        logs = result.stdout
-        if logs:
-            update.message.reply_text(f"Последние репликационные логи:\n{logs}")
-        else:
-            update.message.reply_text("Репликационные логи не найдены.")
+        ssh = ssh_connect(host, port, username, password)
+        log_info = execute_command(ssh, 'cat /var/log/postgresql/postgresql-15-main.log | grep replication')
+        send_long_message(update, log_info)
+        ssh.close()
     except Exception as e:
-        update.message.reply_text(f"Ошибка при получении логов: {str(e)}")
+        update.message.reply_text(f"Ошибка: {e}")
 
 def get_emails(update: Update, context):
     try:
