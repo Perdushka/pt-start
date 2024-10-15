@@ -20,8 +20,8 @@ CREATE TABLE IF NOT EXISTS emails (
 
 
 INSERT INTO emails (email) 
-VALUES ('aboba@gmail.com'), ('bibka@yandex.ru');
+VALUES ('ermakova@mail.ru'), ('cat@ya.ru');
 
 INSERT INTO phone_nubers (phone_number) 
-VALUES ('88005553535'), ('+78888888888');
+VALUES ('+71245673409'), ('+71294653657');
 
