@@ -178,8 +178,11 @@ def get_services(update: Update, context):
 def get_repl_logs(update: Update, context):
     try:
         ssh = ssh_connect(host, port, username, password)
-        log_info = execute_command(ssh, 'cat /var/log/postgresql/postgresql-15-main.log | grep replication')
-        send_long_message(update, log_info)
+        log_info = execute_command(ssh, 'cat /var/log/postgresql/postgresql-15-main.log | grep repl')
+        if log_info:
+            send_long_message(update, log_info)
+        else:
+            update.message.reply_text("Репликационные логи не найдены.")
         ssh.close()
     except Exception as e:
         update.message.reply_text(f"Ошибка: {e}")
